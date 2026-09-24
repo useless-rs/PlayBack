@@ -1,0 +1,40 @@
+[package]
+name = "playback-ui"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "PlayBack's platform-neutral UI model and native integration boundary."
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["gui", "macos", "ui", "player"]
+categories = ["gui", "multimedia::video"]
+
+[features]
+default = []
+native = [
+    "dep:raw-window-handle",
+    "dep:gpui",
+    "dep:gpui-design",
+    "dep:gpui-ui-kit",
+    "dep:lucide-icons",
+]
+
+[dependencies]
+anyhow = { workspace = true }
+crossbeam-channel = { workspace = true }
+playback-config = { workspace = true }
+playback-core = { workspace = true }
+raw-window-handle = { workspace = true, optional = true }
+serde = { workspace = true }
+thiserror = { workspace = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+gpui = { version = "0.2.2", optional = true }
+gpui-design = { version = "0.6.0", features = ["gpui"], optional = true }
+gpui-ui-kit = { version = "0.5.10", optional = true }
+lucide-icons = { version = "1.48.0", optional = true }
+
+[lints]
+workspace = true
