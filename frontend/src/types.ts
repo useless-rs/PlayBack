@@ -77,7 +77,7 @@ export const DEMO_PLAYLIST: MediaItem[] = [
   {
     id: "demo-3",
     path: "",
-    title: "Field Notes — Episode 04",
+    title: "Field Notes: Episode 04",
     subtitle: "Demo library item",
     kind: "video",
     duration: "00:32:09",

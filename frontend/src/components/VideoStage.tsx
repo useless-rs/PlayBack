@@ -12,8 +12,6 @@ interface VideoStageProps {
 export function VideoStage({ media, onOpenFiles, onToggleFullscreen }: VideoStageProps) {
   return (
     <section className="video-stage" aria-label="Video output">
-      <div className="video-stage__ambient video-stage__ambient--one" />
-      <div className="video-stage__ambient video-stage__ambient--two" />
       <div className="video-stage__topline">
         <span className="status-pill"><span className="status-pill__dot" /> mpv ready</span>
         <IconButton label="Toggle fullscreen" icon={Maximize2} onClick={onToggleFullscreen} />
@@ -21,7 +19,6 @@ export function VideoStage({ media, onOpenFiles, onToggleFullscreen }: VideoStag
       {media ? (
         <div className="video-stage__content">
           <div className="video-stage__frame">
-            <div className="video-stage__frame-glow" />
             <Film aria-hidden="true" className="video-stage__film-icon" size={54} strokeWidth={1.2} />
             <p className="video-stage__kicker">Now playing</p>
             <h2>{media.title}</h2>

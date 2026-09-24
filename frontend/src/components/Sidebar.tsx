@@ -83,14 +83,14 @@ export function Sidebar({
               <span className="sidebar__recent-icon"><Film aria-hidden="true" size={14} /></span>
               <span className="sidebar__recent-copy">
                 <strong>The Long Way Home</strong>
-                <small>Yesterday · 01:42:18</small>
+                <small>Yesterday, 01:42:18</small>
               </span>
             </div>
             <div className="sidebar__recent-item">
               <span className="sidebar__recent-icon"><Film aria-hidden="true" size={14} /></span>
               <span className="sidebar__recent-copy">
-                <strong>Field Notes — 04</strong>
-                <small>Monday · 00:32:09</small>
+                <strong>Field Notes: 04</strong>
+                <small>Monday, 00:32:09</small>
               </span>
             </div>
           </div>
