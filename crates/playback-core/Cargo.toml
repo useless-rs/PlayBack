@@ -1,0 +1,30 @@
+[package]
+name = "playback-core"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Core parsing, state, and media-engine abstractions for PlayBack."
+repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["mpv", "video", "player", "libmpv"]
+categories = ["multimedia::video", "api-bindings"]
+
+[features]
+default = []
+native-mpv = ["dep:libmpv2"]
+
+[dependencies]
+clap = { workspace = true }
+parking_lot = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+libmpv2 = { version = "6.0", optional = true }
+
+[lints]
+workspace = true
