@@ -1,0 +1,105 @@
+.transport {
+  flex: 0 0 var(--transport-height);
+  padding: var(--space-3) var(--space-6) var(--space-4);
+  background: var(--surface-base);
+  border-top: 1px solid var(--border-default);
+}
+
+.transport__timeline {
+  display: grid;
+  gap: 7px;
+}
+
+.timeline {
+  position: relative;
+  height: 4px;
+  overflow: visible;
+  cursor: pointer;
+  background: var(--border-default);
+  border-radius: 999px;
+}
+
+.timeline__fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+}
+
+.timeline__thumb {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: var(--surface-raised);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  transform: translate(-50%, -50%);
+}
+
+.transport__time {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+}
+
+.transport__main-row {
+  justify-content: space-between;
+  margin-top: var(--space-3);
+}
+
+.transport__left-actions,
+.transport__right-actions {
+  gap: var(--space-1);
+}
+
+.transport__play {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  margin-inline: 5px;
+  place-items: center;
+  color: var(--accent-on);
+  cursor: pointer;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.transport__play:hover {
+  background: var(--accent-strong);
+  transform: scale(1.04);
+}
+
+.speed-control,
+.volume-control {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 var(--space-2);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.speed-control {
+  cursor: pointer;
+}
+
+.volume-control input,
+.setting-range input {
+  accent-color: var(--accent);
+}
+
+.volume-control input {
+  width: 76px;
+}
