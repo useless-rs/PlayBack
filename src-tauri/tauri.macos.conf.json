@@ -1,0 +1,20 @@
+{
+  "app": {
+    "macOSPrivateApi": true,
+    "windows": [
+      {
+        "label": "main",
+        "decorations": false,
+        "transparent": true,
+        "hiddenTitle": true,
+        "titleBarStyle": "Overlay",
+        "trafficLightPosition": { "x": 18, "y": 18 },
+        "windowEffects": {
+          "effects": ["underPageBackground"],
+          "state": "followsWindowActiveState",
+          "radius": 12
+        }
+      }
+    ]
+  }
+}
