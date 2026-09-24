@@ -1,0 +1,14 @@
+/target/
+**/target/
+node_modules/
+dist/
+frontend/node_modules/
+frontend/dist/
+src-tauri/target/
+src-tauri/gen/
+*.tsbuildinfo
+frontend/vite.config.js
+frontend/vite.config.d.ts
+.DS_Store
+*.swp
+*.tmp
