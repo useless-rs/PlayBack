@@ -1,0 +1,77 @@
+.topbar {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 var(--topbar-height);
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: 18px var(--space-6) 14px var(--space-8);
+  background: var(--surface-base);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.topbar__drag-region {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 28px;
+  -webkit-app-region: drag;
+}
+
+.topbar__title-block {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+  padding-top: var(--space-1);
+}
+
+.topbar__eyebrow,
+.panel-eyebrow {
+  color: var(--text-tertiary);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.topbar__title-block strong {
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: var(--text-ui);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topbar__tools {
+  gap: 5px;
+}
+
+.search-field,
+.playlist-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--text-tertiary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.search-field {
+  width: 200px;
+  height: 36px;
+  padding: 0 var(--space-2) 0 11px;
+}
+
+.search-field input,
+.playlist-search input {
+  min-width: 0;
+  flex: 1;
+  color: var(--text-primary);
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.search-field input::placeholder,
+.playlist-search input::placeholder {
+  color: var(--text-tertiary);
+}

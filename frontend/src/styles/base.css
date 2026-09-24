@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  background: var(--surface-canvas);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font-family: var(--font-ui);
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[role="slider"]:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+::selection {
+  color: var(--accent-on);
+  background: var(--accent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: var(--text-primary);
+  background: var(--surface-canvas);
+}
+
+.sidebar__topline,
+.sidebar__section-heading,
+.sidebar__storage-row,
+.topbar,
+.topbar__tools,
+.transport__main-row,
+.transport__left-actions,
+.transport__right-actions,
+.playlist-panel__header,
+.playlist-panel__header-actions,
+.settings-sheet__header,
+.settings-content__intro,
+.setting-row,
+.setting-range,
+.setting-select,
+.shortcut-card > div,
+.settings-content__footer {
+  display: flex;
+  align-items: center;
+}
+
+.icon-button {
+  display: inline-flex;
+  min-width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-2);
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.icon-button:hover {
+  color: var(--text-primary);
+  background: var(--surface-sunken);
+  border-color: var(--border-default);
+}
+
+.icon-button:active {
+  transform: scale(0.96);
+}
+
+.icon-button.is-active {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: var(--accent-ring);
+}
+
+.icon-button--sm {
+  min-width: 32px;
+  height: 32px;
+  padding-inline: 6px;
+}
+
+.icon-button--lg {
+  min-width: 42px;
+  height: 42px;
+}
+
+.icon-button__label {
+  font-size: var(--text-ui);
+  font-weight: 600;
+}
+
+.stage-play-button,
+.primary-button,
+.playlist-panel__add {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  color: var(--accent-on);
+  font-size: var(--text-ui);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 22px var(--accent-soft);
+  transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.stage-play-button:hover,
+.primary-button:hover,
+.playlist-panel__add:hover {
+  background: var(--accent-strong);
+  box-shadow: 0 10px 26px var(--accent-ring);
+  transform: translateY(-1px);
+}
+
+kbd {
+  font-family: var(--font-mono);
+}
+
+.search-field kbd,
+.empty-state kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 5px;
+  color: var(--text-secondary);
+  font-size: var(--text-caption);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
