@@ -54,7 +54,11 @@ pub fn run_with_arguments(arguments: Vec<String>) -> Result<()> {
     backend_arguments.extend(invocation.arguments);
     MpvProcessBackend::new()
         .run(&backend_arguments)
-        .context("mpv playback failed")?;
+        .map_err(|error| {
+            anyhow::anyhow!(
+                "PlayBack could not run mpv. Install mpv and make sure it is on PATH. Details: {error}"
+            )
+        })?;
     Ok(())
 }
 
@@ -142,7 +146,9 @@ fn generate_completions(shell: Shell) -> Result<()> {
 fn command_definition() -> ClapCommand {
     ClapCommand::new("playback")
         .version(env!("CARGO_PKG_VERSION"))
-        .about("A fast, configurable video player powered by libmpv")
+        .about("A friendly, configurable media player powered by mpv")
+        .long_about("PlayBack is a keyboard-first media player with an mpv-compatible command line. Pass one or more files or URLs, or use --help to see the common options.")
+        .after_help("Examples:\n  playback movie.mp4\n  playback --volume 80 movie.mkv\n  playback --config ~/.config/playback/init.lua movie.mkv\n  playback --completion bash > ~/.local/share/bash-completion/completions/playback")
         .arg(
             Arg::new("file")
                 .help("Media file or URL")
@@ -208,6 +214,13 @@ fn command_definition() -> ClapCommand {
                 .value_name("WIDTHxHEIGHT")
                 .help("Set initial window geometry"),
         )
+        .arg(
+            Arg::new("completion")
+                .long("completion")
+                .value_name("SHELL")
+                .value_parser(["bash", "elvish", "fish", "powershell", "zsh"])
+                .help("Generate a shell completion script"),
+        )
 }
 
 fn print_help() {
@@ -238,6 +251,8 @@ mod tests {
         assert!(help.contains("--volume"));
         assert!(help.contains("--sub-file"));
         assert!(help.contains("--geometry"));
+        assert!(help.contains("--completion"));
+        assert!(help.contains("Examples:"));
     }
 
     #[test]
