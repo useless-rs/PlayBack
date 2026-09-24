@@ -22,7 +22,7 @@ playback-config = { path = "../crates/playback-config" }
 playback-core = { path = "../crates/playback-core" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-tauri = { version = "2.9.3", features = ["macos-private-api", "protocol-asset"] }
+tauri = { version = "2.9.3", features = [ "protocol-asset"] }
 tauri-plugin-dialog = "2.4.1"
 tauri-plugin-fs = "2.4.4"
 tauri-plugin-opener = "2.5.0"
