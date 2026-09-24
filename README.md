@@ -1,7 +1,7 @@
 # PlayBack
 
 [![CI](https://github.com/useless-rs/PlayBack/actions/workflows/ci.yml/badge.svg)](https://github.com/useless-rs/PlayBack/actions/workflows/ci.yml)
-[![crates.io](https://img.shields.io/crates/v/playback.svg)](https://crates.io/crates/playback)
+[![crates.io](https://img.shields.io/crates/v/playback-player.svg)](https://crates.io/crates/playback-player)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
 PlayBack is a keyboard-first desktop media player for people who want a calm library, a focused playback surface, and the flexibility of mpv without being buried in configuration.
@@ -22,6 +22,23 @@ The project is being reorganized around **Tauri v2 + React + TypeScript + Vite**
 ## Screenshots
 
 > Screenshot placeholder: the Tauri shell is designed around a quiet media surface, a compact toolbar, a keyboard-first transport, a playlist rail, and a native-feeling settings sheet. Replace this block with release screenshots once the first desktop build is captured on all three platforms.
+
+## Install the CLI
+
+The installable command is `playback`. The crates.io package is named `playback-player` because `playback` is already registered by another project.
+
+```bash
+cargo install playback-player --locked
+playback --help
+```
+
+You can also install the current repository directly:
+
+```bash
+cargo install --git https://github.com/useless-rs/PlayBack --locked
+```
+
+PlayBack uses the system `mpv` executable for playback, so install mpv through your operating system first when it is not already available.
 
 ## Quick start
 
@@ -49,8 +66,8 @@ The Tauri configuration lives in [`src-tauri/tauri.conf.json`](src-tauri/tauri.c
 The original Rust CLI remains available for scripting and headless environments:
 
 ```bash
-cargo run -p playback -- video.mp4 --volume=80
-cargo run -p playback -- --help
+cargo run -p playback-player -- video.mp4 --volume=80
+cargo run -p playback-player -- --help
 ```
 
 The CLI accepts both `--option=value` and `--option value`, plus mpv-compatible legacy single-dash forms. It forwards unknown options to mpv instead of silently dropping them.
@@ -164,10 +181,10 @@ cargo publish -p playback-core
 cargo publish -p playback-config
 cargo publish -p playback-ui
 cargo publish -p playback-cli
-cargo publish -p playback
+cargo publish -p playback-player
 ```
 
-The GitHub Actions publish workflow performs the same order with Trusted Publishing. Do not publish dependent crates before their internal dependencies exist on crates.io.
+The GitHub Actions publish workflow performs the same order with Trusted Publishing. Do not publish dependent crates before their internal dependencies exist on crates.io. The root package publishes as `playback-player` and installs a binary named `playback`.
 
 ## Migration notes
 

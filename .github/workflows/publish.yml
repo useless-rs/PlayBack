@@ -41,7 +41,7 @@ jobs:
           cargo publish -p playback-config --locked
           cargo publish -p playback-ui --locked
           cargo publish -p playback-cli --locked
-          cargo publish -p playback --locked
+          cargo publish -p playback-player --locked
 
       - name: Create GitHub release
         env:
