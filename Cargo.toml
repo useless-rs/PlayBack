@@ -1,6 +1,6 @@
 [package]
 name = "playback-player"
-version = "0.1.0"
+version = "0.1.1"
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
@@ -68,7 +68,7 @@ crossbeam-channel = "0.5"
 mlua = { version = "0.10", features = ["lua54", "vendored", "serialize", "async"] }
 notify = "8.0"
 parking_lot = "0.12"
-playback-cli = { path = "crates/playback-cli", version = "0.1.0" }
+playback-cli = { path = "crates/playback-cli", version = "0.1.1" }
 playback-config = { path = "crates/playback-config", version = "0.1.0" }
 playback-core = { path = "crates/playback-core", version = "0.1.0" }
 playback-ui = { path = "crates/playback-ui", version = "0.1.0" }
@@ -81,7 +81,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 
 [dependencies]
 anyhow = { workspace = true }
-playback-cli = { path = "crates/playback-cli", version = "0.1.0" }
+playback-cli = { path = "crates/playback-cli", version = "0.1.1" }
 playback-config = { path = "crates/playback-config", version = "0.1.0" }
 playback-core = { path = "crates/playback-core", version = "0.1.0" }
 playback-ui = { path = "crates/playback-ui", version = "0.1.0" }
