@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 48" role="img" aria-labelledby="title desc">
+  <title id="title">PlayBack reversed</title>
+  <desc id="desc">The PlayBack reversed logo for dark surfaces.</desc>
+  <rect x="4" y="4" width="40" height="40" rx="12" fill="#0a84ff"/>
+  <path d="M18 15.5v17l14-8.5-14-8.5Z" fill="#fff"/>
+  <circle cx="34" cy="14" r="3" fill="#ffb340"/>
+  <text x="60" y="31" fill="#f5f5f7" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif" font-size="24" font-weight="600" letter-spacing="-0.8">PlayBack</text>
+</svg>

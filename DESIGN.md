@@ -2,7 +2,7 @@
 
 ## 1. Atmosphere & Identity
 
-PlayBack is a calm desktop media room: warm paper and ink around a focused, near-black viewing surface. The interface borrows Anthropic's editorial restraint without copying its identity, product copy, logos, or illustrations. Poppins gives controls and headings quiet precision; Lora gives descriptions and long-form interface text a readable, human cadence. The signature is the warm orange playback ring against an ink-dark media stage, carried through the play button, timeline, active navigation, and focus states.
+PlayBack is a quiet macOS-style media room: a near-black viewing surface framed by translucent system chrome, with content doing the talking. The interface borrows macOS 26's liquid-glass material language without copying Apple product chrome or logos. System sans typography keeps controls compact and familiar; the signature is a single warm playback signal against cool graphite glass, carried through the play button, timeline, and active media state.
 
 ## 2. Color
 
@@ -10,35 +10,35 @@ PlayBack is a calm desktop media room: warm paper and ink around a focused, near
 
 | Role | Token | Light | Dark | Usage |
 | --- | --- | --- | --- | --- |
-| App canvas | `--surface-canvas` | `#faf9f5` | `#141413` | Main application background |
-| Base panel | `--surface-base` | warm mix of `#faf9f5` and `#e8e6dc` | warm mix of `#141413` and `#faf9f5` | Sidebar, top bar, playlist |
-| Raised panel | `--surface-raised` | `#faf9f5` | warm charcoal derived from `#141413` | Dialogs and selected controls |
-| Media stage | `--surface-stage` | `#141413` | `#0f0f0e` derived | Video-focused region in both themes |
-| Primary text | `--text-primary` | `#141413` | `#faf9f5` | Headings and primary labels |
-| Secondary text | `--text-secondary` | derived warm gray | `#b0aea5` | Supporting copy and metadata |
-| Disabled text | `--text-tertiary` | derived warm gray | derived from `#b0aea5` | Disabled and low-emphasis content |
-| Border | `--border-default` | derived from `#e8e6dc` | derived from `#faf9f5` | Dividers and contained surfaces |
-| Primary accent | `--accent` | `#a95335` derived for text contrast | `#d97757` | Playback, active navigation, primary action |
-| Accent surface | `--accent-soft` | `#d97757` at low opacity | `#d97757` at low opacity | Selected and playback states |
-| Focus support | `--focus` | `#3f6f9f` derived | `#6a9bcc` | Focus ring and informational state |
-| Success | `--status-success` | `#5f7446` derived | `#788c5d` | Ready and success state |
-| Error | `--status-error` | `#9f342f` derived | `#c76258` derived | Destructive feedback |
+| App canvas | `--surface-canvas` | `#f5f5f7` | `#0b0b0d` | Main application background |
+| Glass chrome | `--surface-glass` | luminous white with a restrained sheen | deep graphite with a restrained sheen | Sidebar, top bar, playlist, transport |
+| Glass raised | `--surface-glass-strong` | bright white with inner highlight | lifted graphite with inner highlight | Active controls and sheets |
+| Media stage | `--surface-stage` | `#1d1d1f` | `#09090a` | Video-focused region in both themes |
+| Primary text | `--text-primary` | `#1d1d1f` | `#f5f5f7` | Headings and primary labels |
+| Secondary text | `--text-secondary` | `#6e6e73` | `#a1a1a6` | Supporting copy and metadata |
+| Disabled text | `--text-tertiary` | `#86868b` | `#86868b` | Disabled and low-emphasis content |
+| Glass border | `--border-default` | translucent black | translucent white | Dividers and contained surfaces |
+| Action blue | `--accent` | `#0071e3` | `#0a84ff` | Primary action, selection, focus |
+| Playback signal | `--playback` | `#ff9f0a` | `#ffb340` | Play button, timeline, active media |
+| Focus support | `--focus` | `#0071e3` | `#0a84ff` | Focus ring and informational state |
+| Success | `--status-success` | `#248a3d` | `#30d158` | Ready and success state |
+| Error | `--status-error` | `#d70015` | `#ff453a` | Destructive feedback |
 
 ### Rules
 
-- Orange signals playback and primary action only.
-- Blue supports focus and information; it is not decorative.
+- Action blue is reserved for primary actions, selection, and focus.
+- Warm amber is reserved for playback state and the playhead; it is not a second navigation accent.
 - Green signals readiness and success; it is not a second primary action color.
 - The media stage remains dark in both themes so content does not compete with the video surface.
-- Depth comes from tonal shifts and warm one-pixel rings, not glossy cards or cool glass.
+- Glass belongs to navigation, toolbars, sheets, and controls; the content stage stays visually solid.
 - Every derived semantic color must maintain WCAG AA contrast against its intended surface.
 
 ## 3. Typography
 
 ### Font Stack
 
-- UI and headings: `Poppins`, `Arial`, sans-serif
-- Body and editorial copy: `Lora`, `Georgia`, serif
+- UI and headings: `-apple-system`, `BlinkMacSystemFont`, `SF Pro Display`, `Helvetica Neue`, sans-serif
+- Body and supporting copy: `-apple-system`, `BlinkMacSystemFont`, `SF Pro Text`, `Helvetica Neue`, sans-serif
 - Timecodes and keyboard hints: `ui-monospace`, `SFMono-Regular`, `Consolas`, monospace
 
 ### Scale
@@ -54,8 +54,8 @@ PlayBack is a calm desktop media room: warm paper and ink around a focused, near
 
 ### Rules
 
-- Poppins is used for headings, navigation, buttons, and compact interface labels.
-- Lora is used for body copy, media descriptions, and empty-state guidance.
+- The system sans stack is used for every interface surface; the player should feel native before it feels branded.
+- Weight and color, not extra font families, create hierarchy.
 - Monospace is reserved for time-varying or keyboard-specific data.
 - Body text never falls below 12px in the desktop shell.
 
@@ -67,10 +67,10 @@ All spacing derives from 4px. The primary rhythm uses 4, 8, 12, 16, 24, 32, and 
 
 ### Shell
 
-- Sidebar: 248px expanded, 72px collapsed.
-- Top bar: 76px desktop, 68px compact.
-- Playlist: 304px desktop, 270px medium, hidden below 680px.
-- Transport: 112px desktop with a stable timeline and control row.
+- Sidebar: 220px expanded, 68px collapsed.
+- Top bar: 68px desktop, 60px compact.
+- Playlist: 320px desktop, 280px medium, hidden below 680px.
+- Transport: 96px desktop with a stable timeline and compact control row.
 - Content remains left-aligned. The app never centers the full shell.
 - The video stage owns the flexible central space; sidebars own their own scrolling.
 
@@ -92,16 +92,16 @@ All spacing derives from 4px. The primary rhythm uses 4, 8, 12, 16, 24, 32, and 
 
 ### Sidebar Navigation
 
-- **Structure:** brand mark, primary navigation, recent items, local storage, settings.
-- **Variants:** expanded and collapsed.
+- **Structure:** brand mark, Library, Playlist, Open media, and Settings.
+- **Variants:** expanded and collapsed glass rail.
 - **States:** default, hover, active, focus-visible, collapsed.
-- **Layout:** fixed-width flex column; recent list may scroll independently when content grows.
+- **Layout:** fixed-width flex column with no dashboard widgets or storage meters; media remains the focus.
 
 ### Top Bar
 
-- **Structure:** current media title, search, appearance, playlist, and settings actions.
+- **Structure:** current media title, search, appearance, playlist, settings, and desktop window controls.
 - **States:** default, focused input, icon hover, icon active.
-- **Layout:** drag region behind controls, single-line desktop toolbar.
+- **Layout:** drag region behind controls, single-line desktop toolbar with a compact glass control cluster.
 
 ### Video Stage
 
@@ -112,9 +112,10 @@ All spacing derives from 4px. The primary rhythm uses 4, 8, 12, 16, 24, 32, and 
 
 ### Transport Bar
 
-- **Structure:** timeline, time labels, primary playback controls, secondary tools.
-- **States:** playing, paused, muted, subtitle active, playlist active.
+- **Structure:** timeline, time labels, previous/play/next, volume, and fullscreen.
+- **States:** playing, paused, muted, and timeline focus.
 - **Accessibility:** timeline is keyboard operable with visible focus and ARIA values.
+- **Simplification:** speed, subtitle, and playlist controls belong in Settings or the top bar rather than crowding the transport.
 - **Motion:** progress and control feedback only; no decorative motion.
 
 ### Playlist Panel
@@ -130,24 +131,40 @@ All spacing derives from 4px. The primary rhythm uses 4, 8, 12, 16, 24, 32, and 
 - **States:** open, closed, control hover, focus, checked, unchecked.
 - **Accessibility:** dialog role, modal semantics, labelled title, full keyboard reachability.
 
+### Brand Mark
+
+- The canonical mark is [`logo.svg`](../logo.svg).
+- The compact app mark is [`assets/logos/icon-only/logo-icon.svg`](../assets/logos/icon-only/logo-icon.svg).
+- Keep the mark flat, preserve its aspect ratio, and use clear space equal to the icon height.
+
+### Liquid Glass Material
+
+- **Scope:** sidebar, top bar, playlist, transport, settings sheet, menus, and compact control clusters only.
+- **Structure:** a translucent semantic tint, 24–32px backdrop blur, 140–160% saturation, one-pixel inner highlight, and a soft ambient shadow.
+- **Fallback:** reduced-transparency environments use an opaque semantic surface with the same border and shadow hierarchy.
+- **Performance:** blur is restricted to fixed or non-scrolling chrome; playlist and settings content scroll inside an opaque inner surface.
+- **Consistency:** one glass recipe is used everywhere. Panels do not each invent a different radius, opacity, or blur.
+- **Depth order:** window canvas → glass chrome → solid content surfaces → focused controls → overlays.
+
 ## 6. Motion & Interaction
 
-- Micro feedback: 120-160ms ease-out.
-- Panel and sidebar transitions: 180-220ms ease-out.
-- Only `transform`, `opacity`, `color`, `background-color`, and `border-color` may transition.
+- Micro feedback: 140-180ms with the shared Apple-like ease-out curve.
+- Panel and sidebar transitions: 220-280ms with the same curve.
+- Only `transform`, `opacity`, `color`, `background-color`, `border-color`, and `filter` may transition.
 - Pressed controls may scale down slightly; no layout properties animate.
 - `prefers-reduced-motion: reduce` disables non-essential transitions and the playing indicator animation.
 - No entrance animation or ambient motion is added to the media stage.
 
 ## 7. Depth & Surface
 
-The depth strategy is **mixed tonal shift and warm ring elevation**.
+The depth strategy is **macOS liquid glass over solid content**.
 
-- Resting surfaces: tonal shift with a subtle warm border.
-- Interactive surfaces: one-pixel warm ring on hover and focus.
-- Primary action: orange fill with near-black text and a restrained warm shadow.
-- Dialog: raised warm surface plus a soft ambient shadow.
-- Media frame: near-black surface with an orange progress ring; no blurred glow or glass.
+- Resting chrome: translucent material with a one-pixel inner highlight and restrained ambient shadow.
+- Interactive surfaces: brighter glass tint plus blue focus/selection ring.
+- Primary action: system blue fill with white text and a restrained blue ambient shadow.
+- Playback signal: amber playhead and play control, never a decorative glow.
+- Dialog: raised glass frame surrounding an opaque scrolling content surface.
+- Media frame: a deep, blurred stage that keeps desktop texture atmospheric without competing with active video; video content remains opaque when present.
 
 ## 8. Accessibility Constraints & Accepted Debt
 
@@ -164,5 +181,29 @@ The depth strategy is **mixed tonal shift and warm ring elevation**.
 
 | Item | Location | Why accepted | Owner / Exit |
 | --- | --- | --- | --- |
-| Central media frame is a placeholder for mpv's native output window. | `VideoStage` | The current Tauri architecture intentionally keeps mpv process control separate from the webview shell. | Replace when the embedded media surface is introduced. |
-| Settings dialog does not yet trap focus or close on Escape. | `SettingsSheet` | Pre-existing interaction debt outside this visual rebrand. | Implement with the next settings workflow improvement. |
+| Native settings dialog behavior is platform-owned. | `SettingsSheet` | The browser-native `<dialog>` owns modal focus and Escape semantics; app code only synchronizes open state. | Re-test focus restoration if the dialog implementation changes. |
+
+## 9. Delivery & Recovery Contract
+
+- The crates.io package `playback-player` is the CLI distribution; it must never be presented as the desktop UI installer.
+- The Tauri desktop distribution is the user-facing app. Its release must include the production `frontend/dist` bundle and an installable artifact for the target platform.
+- The desktop window is opaque and uses the app canvas token as its background. Transparency and under-page effects are not allowed because they expose terminal or desktop content through the player shell.
+- A frameless desktop shell must expose labeled minimize, maximize/restore, and close controls. These controls are hidden in browser preview and never replace the native web content.
+- The first-run state is a composed invitation to open media, not an empty canvas. The primary action must be reachable by pointer, keyboard, and the documented Cmd/Ctrl+O shortcut.
+- If React rendering or an unexpected UI exception occurs, the app must show a branded recovery surface with a reload action rather than a blank window.
+- Playlist navigation must reveal the playlist when it is hidden; navigation state must correspond to a visible layout change.
+- Browser preview and Tauri desktop use the same React surface. Tauri-only controls and IPC failures must degrade safely without removing the core shell.
+
+### Recovery Primitive
+
+- **Structure:** icon, concise failure message, explanation, reload button, and short diagnostic hint.
+- **State:** rendered only after a caught UI exception; the normal shell remains the default state.
+- **Accessibility:** the recovery heading receives focus after mount; the reload action is a semantic button with a visible focus ring.
+- **Motion:** opacity and transform only, with reduced-motion support.
+
+### Window Controls Primitive
+
+- **Structure:** three compact icon buttons in the top bar, aligned to the trailing edge.
+- **States:** default, hover, focus-visible, pressed, and close hover.
+- **Accessibility:** each button has a descriptive label and a native disabled state only when the action is unavailable.
+- **Visibility:** Tauri desktop only; browser preview renders no empty control cluster.

@@ -1,10 +1,14 @@
 # PlayBack
 
+<p align="center">
+  <img src="./logo.svg" alt="PlayBack" width="248" />
+</p>
+
 [![CI](https://github.com/useless-rs/PlayBack/actions/workflows/ci.yml/badge.svg)](https://github.com/useless-rs/PlayBack/actions/workflows/ci.yml)
 [![crates.io](https://img.shields.io/crates/v/playback-player.svg)](https://crates.io/crates/playback-player)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 
-PlayBack is a keyboard-first desktop media player for people who want a calm library, a focused playback surface, and the flexibility of mpv without being buried in configuration.
+PlayBack is a keyboard-first desktop media player with a calm macOS-inspired liquid-glass shell, a focused playback surface, and the flexibility of mpv without being buried in configuration.
 
 The project is being reorganized around **Tauri v2 + React + TypeScript + Vite**, while preserving the existing Rust playback, configuration, and CLI crates. The visual language is original: it borrows interaction ideas from modern media players and macOS conventions, but it does not copy IINA assets, branding, source, or trade dress.
 
@@ -13,15 +17,39 @@ The project is being reorganized around **Tauri v2 + React + TypeScript + Vite**
 ## What is here
 
 - **Library-first playback** — open local media, keep a lightweight queue, and return to the last useful context quickly.
-- **Keyboard-first UX** — Space, arrow keys, `F`, `⌘K`, and `⌘O` are first-class actions, not hidden power-user features.
+- **Keyboard-first UX** — Space, arrow keys, `F`, `Ctrl/⌘K`, and `Ctrl/⌘O` are first-class actions, not hidden power-user features.
 - **Tauri v2 backend** — typed commands, events, capabilities, window-state persistence, native dialogs, OS information, and opener support.
 - **Rust core** — mpv-compatible parsing, process backend, shared playback state, Lua configuration, and CLI support remain reusable crates.
 - **Cross-platform foundation** — the frontend and Tauri shell target macOS, Windows, and Linux; the CLI remains usable in headless environments.
 - **Reduced-motion and accessibility basics** — visible focus, semantic buttons, keyboard seek controls, screen-reader labels, responsive desktop layouts, and `prefers-reduced-motion` support.
 
+## Brand
+
+- **Logo:** [`logo.svg`](./logo.svg) for the full horizontal mark; [`assets/logos/icon-only/logo-icon.svg`](./assets/logos/icon-only/logo-icon.svg) for favicons and app icons.
+- **Palette:** system blue `#0a84ff` for actions, amber `#ffb340` for playback state, graphite `#0b0b0d` for the stage, and Apple gray `#f5f5f7` for light surfaces.
+- **Voice:** calm, precise, and quietly confident. Say what the player does; do not sound like a dashboard or a marketing machine.
+- **Material:** liquid glass is reserved for navigation and controls; the media stage stays solid and readable.
+- **Rules:** keep clear space around the mark, use the approved variants, and never stretch, rotate, gradient-fill, or shadow the logo.
+
+See [`DESIGN.md`](DESIGN.md) and the approved assets under [`assets/logos/`](assets/logos/) for the full identity and usage rules.
+
+## Get the desktop app
+
+The desktop UI is the Tauri application. It is delivered as a platform bundle in GitHub Releases, not as the crates.io CLI package:
+
+- **Linux:** download the `.deb` or `.rpm` asset from the latest `desktop-v*` release.
+- **macOS:** download the `.dmg` asset.
+- **Windows:** download the `.msi` or `.exe` asset.
+
+The `playback-player` crate installs the `playback` command-line tool only; it does not install this graphical window.
+
 ## Screenshots
 
-> Screenshot placeholder: the Tauri shell is designed around a quiet media surface, a compact toolbar, a keyboard-first transport, a playlist rail, and a native-feeling settings sheet. Replace this block with release screenshots once the first desktop build is captured on all three platforms.
+<p align="center">
+  <img src="docs/playback-ui.png" alt="PlayBack desktop UI in dark mode" width="960" />
+</p>
+
+The desktop shell is designed around a quiet media surface, compact toolbar, keyboard-first transport, playlist rail, and native-feeling settings sheet.
 
 ## Install the CLI
 
@@ -103,7 +131,7 @@ The interface is designed around four principles:
 3. **State should never surprise you.** The active item, playback position, volume, and queue state are always easy to locate.
 4. **Motion explains change.** Transitions are short, purposeful, and disabled when the system requests reduced motion.
 
-The visual system uses a neutral graphite base, warm playback accent, system-first typography, restrained translucency, and compact controls. It is intentionally not a clone of any existing player.
+The visual system uses a neutral graphite base, system-blue actions, a single amber playback signal, system-first typography, restrained liquid-glass chrome, and compact controls. It is intentionally not a clone of any existing player.
 
 ## Tauri commands and events
 
@@ -154,15 +182,17 @@ CI runs the Rust workspace, frontend build, and Tauri backend check on Ubuntu, m
 
 ## Build desktop bundles
 
+The normal Tauri build embeds `frontend/dist`, so the desktop artifact contains the same UI verified in the browser preview. On Linux, use the explicit package script to avoid the optional AppImage/FUSE bundler:
+
 ```bash
-# macOS
-npm run desktop:build
+# Linux (.deb and .rpm)
+npm run desktop:package
 
-# Windows
-npm run desktop:build
+# macOS (.dmg)
+npm run desktop:build -- --bundles dmg
 
-# Linux
-npm run desktop:build
+# Windows (.msi and NSIS installer)
+npm run desktop:build -- --bundles msi,nsis
 ```
 
 For a macOS universal build, install both Rust targets first:
@@ -195,7 +225,7 @@ The original project used a macOS-only GPUI shell. The migration keeps the Rust 
 - `playback-cli` remains available for automation and headless playback.
 - `playback-ui` remains as a renderer-neutral model crate while the React frontend becomes the primary desktop UI.
 - The managed Tauri backend starts `mpv` as a child process and communicates through typed commands/events.
-- The macOS window uses an overlay titlebar, hidden title, traffic-light positioning, transparent material, and a rounded native effect through Tauri configuration.
+- The macOS window uses an overlay titlebar, hidden title, traffic-light positioning, and an opaque app-canvas background; custom window controls keep the frameless shell usable without exposing desktop content through the player.
 - Linux and Windows use the same React surface and Tauri command boundary, with platform behavior delegated to the webview and operating system.
 
 ## Lucide icon inventory
@@ -205,9 +235,9 @@ The React UI uses Lucide icons only. Structural icons have accessible labels thr
 | Area | Icons |
 | --- | --- |
 | Navigation | `Film`, `ListVideo`, `FolderOpen`, `Settings2`, `PanelLeftClose`, `PanelLeftOpen`, `HardDrive` |
-| Window and actions | `Search`, `Command`, `Moon`, `Sun`, `PanelRight`, `MoreHorizontal`, `Plus`, `X` |
+| Window and actions | `Search`, `Command`, `Moon`, `Sun`, `PanelRight`, `MoreHorizontal`, `Plus`, `X`, `Minus`, `Maximize2` |
 | Playback | `Play`, `Pause`, `RotateCcw`, `RotateCw`, `SkipBack`, `SkipForward`, `Volume2`, `VolumeX`, `Gauge`, `Captions`, `Maximize2` |
-| Playlist and settings | `Check`, `Trash2`, `SlidersHorizontal`, `MonitorPlay`, `Subtitles`, `Palette`, `Keyboard`, `Cpu` |
+| Playlist and settings | `Check`, `Trash2`, `SlidersHorizontal`, `MonitorPlay`, `Subtitles`, `Palette`, `Keyboard`, `Cpu`, `AlertTriangle`, `RefreshCw` |
 
 ## License
 

@@ -1,0 +1,32 @@
+{
+  "name": "PlayBack",
+  "version": "0.1.0",
+  "positioning": "A calm, keyboard-first media player with a macOS-inspired liquid-glass shell.",
+  "colors": {
+    "actionBlueLight": "#0071e3",
+    "actionBlueDark": "#0a84ff",
+    "playbackAmberLight": "#a16207",
+    "playbackAmberDark": "#ffb340",
+    "canvasLight": "#f5f5f7",
+    "canvasDark": "#0b0b0d",
+    "stageLight": "#1d1d1f",
+    "stageDark": "#09090a",
+    "textPrimaryLight": "#1d1d1f",
+    "textPrimaryDark": "#f5f5f7",
+    "successLight": "#248a3d",
+    "successDark": "#30d158",
+    "errorLight": "#d70015",
+    "errorDark": "#ff453a"
+  },
+  "typography": {
+    "ui": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif",
+    "mono": "ui-monospace, 'SFMono-Regular', 'Consolas', monospace"
+  },
+  "logo": {
+    "primary": "logo.svg",
+    "icon": "assets/logos/icon-only/logo-icon.svg",
+    "fullLight": "assets/logos/full-horizontal/logo-full-color.svg",
+    "fullDark": "assets/logos/full-horizontal/logo-reversed.svg"
+  },
+  "voice": ["calm", "precise", "quietly confident", "respectful"]
+}

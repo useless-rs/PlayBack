@@ -1,0 +1,54 @@
+{
+  "assets": [
+    {
+      "id": "playback-logo-horizontal",
+      "name": "PlayBack Full Horizontal Logo",
+      "type": "logo",
+      "path": "assets/logos/full-horizontal/logo_playback_evergreen_20260924_horizontal-full-color.svg",
+      "mimeType": "image/svg+xml",
+      "tags": ["brand", "logo", "web", "app", "evergreen"],
+      "status": "approved",
+      "version": 1
+    },
+    {
+      "id": "playback-logo-icon",
+      "name": "PlayBack Icon Mark",
+      "type": "logo",
+      "path": "assets/logos/icon-only/logo_playback_evergreen_20260924_icon-full-color.svg",
+      "mimeType": "image/svg+xml",
+      "tags": ["brand", "logo", "favicon", "app", "evergreen"],
+      "status": "approved",
+      "version": 1
+    },
+    {
+      "id": "playback-logo-reversed",
+      "name": "PlayBack Reversed Horizontal Logo",
+      "type": "logo",
+      "path": "assets/logos/full-horizontal/logo-reversed.svg",
+      "mimeType": "image/svg+xml",
+      "tags": ["brand", "logo", "dark", "web", "evergreen"],
+      "status": "approved",
+      "version": 1
+    },
+    {
+      "id": "playback-logo-mono-black",
+      "name": "PlayBack Monochrome Dark Logo",
+      "type": "logo",
+      "path": "assets/logos/monochrome/logo-black.svg",
+      "mimeType": "image/svg+xml",
+      "tags": ["brand", "logo", "monochrome", "light", "evergreen"],
+      "status": "approved",
+      "version": 1
+    },
+    {
+      "id": "playback-logo-mono-white",
+      "name": "PlayBack Monochrome Light Logo",
+      "type": "logo",
+      "path": "assets/logos/monochrome/logo-white.svg",
+      "mimeType": "image/svg+xml",
+      "tags": ["brand", "logo", "monochrome", "dark", "evergreen"],
+      "status": "approved",
+      "version": 1
+    }
+  ]
+}

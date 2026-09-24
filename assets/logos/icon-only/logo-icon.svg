@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-labelledby="title desc">
+  <title id="title">PlayBack mark</title>
+  <desc id="desc">A blue rounded square with a white play symbol and amber status dot.</desc>
+  <rect x="4" y="4" width="40" height="40" rx="12" fill="#0a84ff"/>
+  <path d="M18 15.5v17l14-8.5-14-8.5Z" fill="#fff"/>
+  <circle cx="34" cy="14" r="3" fill="#ffb340"/>
+</svg>
