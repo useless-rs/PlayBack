@@ -1,14 +1,18 @@
 [package]
-name = "playback"
+name = "playback-player"
 version = "0.1.0"
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
-description = "A fast, configurable video player powered by libmpv."
-repository = "https://github.com/playback-rs/playback"
+description = "A friendly, configurable media player powered by mpv."
+repository = "https://github.com/useless-rs/PlayBack"
 readme = "README.md"
 keywords = ["video", "player", "mpv", "multimedia"]
 categories = ["multimedia::video", "command-line-utilities"]
+
+[[bin]]
+name = "playback"
+path = "src/main.rs"
 
 [workspace]
 resolver = "2"
@@ -25,8 +29,8 @@ edition = "2024"
 rust-version = "1.85"
 license = "MIT OR Apache-2.0"
 authors = ["The PlayBack contributors"]
-repository = "https://github.com/playback-rs/playback"
-homepage = "https://github.com/playback-rs/playback"
+repository = "https://github.com/useless-rs/PlayBack"
+homepage = "https://github.com/useless-rs/PlayBack"
 
 [workspace.lints.rust]
 unsafe_op_in_unsafe_fn = "deny"

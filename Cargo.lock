@@ -4151,19 +4151,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
 
 [[package]]
-name = "playback"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "assert_cmd",
- "playback-cli",
- "playback-config",
- "playback-core",
- "playback-ui",
- "predicates",
-]
-
-[[package]]
 name = "playback-cli"
 version = "0.1.0"
 dependencies = [
@@ -4203,6 +4190,19 @@ dependencies = [
  "serde_json",
  "thiserror 2.0.21",
  "tracing",
+]
+
+[[package]]
+name = "playback-player"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "assert_cmd",
+ "playback-cli",
+ "playback-config",
+ "playback-core",
+ "playback-ui",
+ "predicates",
 ]
 
 [[package]]
