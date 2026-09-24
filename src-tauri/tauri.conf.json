@@ -1,0 +1,58 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "PlayBack",
+  "version": "0.1.0",
+  "identifier": "com.uselessrs.playback",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../frontend/dist"
+  },
+  "app": {
+    "macOSPrivateApi": true,
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data:; media-src 'self' asset: http://asset.localhost; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'",
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["$APPDATA/**", "$HOME/**"]
+      }
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "PlayBack",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 960,
+        "minHeight": 640,
+        "resizable": true,
+        "fullscreen": false,
+        "decorations": false,
+        "transparent": true,
+        "hiddenTitle": true,
+        "titleBarStyle": "Overlay",
+        "backgroundColor": "#0B0D10",
+        "theme": "Dark",
+        "visible": true,
+        "windowEffects": {
+          "effects": ["underPageBackground"],
+          "state": "followsWindowActiveState",
+          "radius": 12
+        },
+        "trafficLightPosition": { "x": 18, "y": 18 }
+      }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "Video",
+    "shortDescription": "A focused desktop media player powered by mpv.",
+    "longDescription": "PlayBack is a keyboard-first desktop media player with a calm library, focused playback controls, and an mpv-powered Rust core.",
+    "homepage": "https://github.com/useless-rs/PlayBack",
+    "licenseFile": "../LICENSE",
+    "icon": ["icons/icon.png"]
+  },
+  "plugins": {}
+}
