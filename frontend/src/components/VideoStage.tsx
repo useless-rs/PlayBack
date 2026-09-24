@@ -35,12 +35,12 @@ export function VideoStage({ media, onOpenFiles, onToggleFullscreen }: VideoStag
             <div className="empty-state__icon"><Film aria-hidden="true" size={28} strokeWidth={1.4} /></div>
             <p className="empty-state__eyebrow">Your cinema, focused</p>
             <h1>Open something worth watching.</h1>
-            <p className="empty-state__copy">Drop a file here or browse your library. PlayBack keeps the controls quiet until you need them.</p>
+            <p className="empty-state__copy">Choose a file to begin or browse your library. PlayBack keeps the controls quiet until you need them.</p>
             <button type="button" className="primary-button" onClick={onOpenFiles}>
               <Upload aria-hidden="true" size={16} />
               <span>Open media</span>
             </button>
-            <span className="empty-state__shortcut">Press <kbd>⌘ O</kbd> to browse</span>
+            <span className="empty-state__shortcut">Press <kbd>Ctrl/⌘ O</kbd> to browse</span>
           </div>
         </div>
       )}

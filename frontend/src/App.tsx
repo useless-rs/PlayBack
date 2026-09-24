@@ -10,6 +10,7 @@ import { VideoStage } from "./components/VideoStage";
 import {
   fetchConfig,
   fetchSnapshot,
+  isTauriRuntime,
   openMedia,
   saveConfig,
   seekAbsolute,
@@ -67,6 +68,8 @@ export default function App() {
   const [playlist, setPlaylist] = useState<MediaItem[]>(DEMO_PLAYLIST);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<LibraryView>("library");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [notice, setNotice] = useState<string | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
@@ -99,11 +102,24 @@ export default function App() {
     };
   }, [applyStateEvent]);
 
+  useEffect(() => {
+    if (!notice) {
+      return;
+    }
+    const timeout = window.setTimeout(() => setNotice(null), 6000);
+    return () => window.clearTimeout(timeout);
+  }, [notice]);
+
   const updateSnapshot = useCallback((update: Partial<PlaybackSnapshot>) => {
     setSnapshot((current) => ({ ...current, ...update }));
   }, []);
 
   const openFiles = useCallback(async () => {
+    if (!isTauriRuntime()) {
+      setNotice("File picking is available in the desktop app. Use the Tauri build to open local media.");
+      return;
+    }
+    setNotice(null);
     try {
       const selection = await open({
         multiple: true,
@@ -127,6 +143,7 @@ export default function App() {
       }
     } catch (error) {
       console.warn("PlayBack could not open the media picker", error);
+      setNotice("PlayBack could not open the file picker. Try again from Open media.");
     }
   }, [applyStateEvent, updateSnapshot]);
 
@@ -194,7 +211,13 @@ export default function App() {
       if (target?.tagName === "INPUT" || target?.tagName === "TEXTAREA") {
         return;
       }
-      if (event.key === " ") {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        document.getElementById("library-search")?.focus();
+      } else if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "o") {
+        event.preventDefault();
+        void openFiles();
+      } else if (event.key === " ") {
         event.preventDefault();
         handleTogglePlayback();
       } else if (event.key === "ArrowLeft") {
@@ -216,9 +239,16 @@ export default function App() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [handleFullscreen, handleSeekRelative, handleTogglePlayback, handleVolume, snapshot.volume]);
+  }, [handleFullscreen, handleSeekRelative, handleTogglePlayback, handleVolume, openFiles, snapshot.volume]);
 
   const activeMedia = useMemo(() => playlist.find((item) => item.id === activeId) ?? null, [activeId, playlist]);
+  const filteredPlaylist = useMemo(() => {
+    const query = searchQuery.trim().toLocaleLowerCase();
+    if (!query) {
+      return playlist;
+    }
+    return playlist.filter((item) => `${item.title} ${item.subtitle}`.toLocaleLowerCase().includes(query));
+  }, [playlist, searchQuery]);
   const title = snapshot.mediaTitle || activeMedia?.title || "Nothing playing";
 
   const updateConfig = useCallback((next: AppConfig) => {
@@ -226,17 +256,24 @@ export default function App() {
     void saveConfig(next);
   }, []);
 
+  const handleViewChange = useCallback((view: LibraryView) => {
+    setActiveView(view);
+    if (view === "playlist" && !config.showPlaylist) {
+      updateConfig({ ...config, showPlaylist: true });
+    }
+  }, [config, updateConfig]);
+
   const removeItem = useCallback((id: string) => {
     setPlaylist((current) => current.filter((item) => item.id !== id));
     setActiveId((current) => (current === id ? null : current));
   }, []);
 
   return (
-    <div className={`app app--${config.theme}${config.animations ? " app--animated" : ""}`}>
+    <div className={`app app--${config.theme} app--view-${activeView}${config.animations ? " app--animated" : ""}${config.blurBackground ? "" : " app--reduced-transparency"}`}>
       <Sidebar
         activeView={activeView}
         collapsed={sidebarCollapsed}
-        onViewChange={setActiveView}
+        onViewChange={handleViewChange}
         onOpenFiles={() => void openFiles()}
         onOpenSettings={() => setSettingsOpen(true)}
         onToggleCollapsed={() => setSidebarCollapsed((value) => !value)}
@@ -244,9 +281,11 @@ export default function App() {
       <main className="workspace">
         <TopBar
           title={title}
-          theme={config.theme}
-          playlistVisible={config.showPlaylist}
-          onToggleTheme={() => updateConfig({ ...config, theme: config.theme === "dark" ? "light" : "dark" })}
+           theme={config.theme}
+           playlistVisible={config.showPlaylist}
+           searchQuery={searchQuery}
+           onSearchChange={setSearchQuery}
+           onToggleTheme={() => updateConfig({ ...config, theme: config.theme === "dark" ? "light" : "dark" })}
           onTogglePlaylist={() => updateConfig({ ...config, showPlaylist: !config.showPlaylist })}
           onOpenSettings={() => setSettingsOpen(true)}
         />
@@ -256,25 +295,20 @@ export default function App() {
             <TransportBar
               paused={snapshot.paused}
               position={snapshot.position}
-              duration={snapshot.duration}
-              volume={snapshot.volume}
-              speed={snapshot.speed}
-              subtitleVisible={snapshot.subtitleVisible}
-              playlistVisible={config.showPlaylist}
+               duration={snapshot.duration}
+               volume={snapshot.volume}
                onTogglePlayback={handleTogglePlayback}
                onSeekRelative={handleSeekRelative}
                onSeekAbsolute={handleSeekAbsolute}
                onPreviousTrack={handlePrevious}
                onNextTrack={handleNext}
                onSetVolume={handleVolume}
-              onToggleSubtitles={() => updateSnapshot({ subtitleVisible: !snapshot.subtitleVisible })}
-              onTogglePlaylist={() => updateConfig({ ...config, showPlaylist: !config.showPlaylist })}
-              onToggleFullscreen={handleFullscreen}
+               onToggleFullscreen={handleFullscreen}
             />
           </div>
           {config.showPlaylist ? (
             <PlaylistPanel
-              items={playlist}
+               items={filteredPlaylist}
               activeId={activeId}
               onSelect={handleSelect}
               onRemove={removeItem}
@@ -284,6 +318,14 @@ export default function App() {
         </div>
       </main>
       <SettingsSheet open={settingsOpen} config={config} onClose={() => setSettingsOpen(false)} onChange={updateConfig} />
+      {notice ? (
+        <div className="app-notice" role="status" aria-live="polite">
+          <span>{notice}</span>
+          <button type="button" className="app-notice__dismiss" onClick={() => setNotice(null)}>
+            Dismiss
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

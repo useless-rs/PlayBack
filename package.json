@@ -11,11 +11,10 @@
     "tauri": "tauri",
     "desktop:dev": "tauri dev",
     "desktop:build": "tauri build",
+    "desktop:package": "tauri build --bundles deb,rpm",
     "desktop:info": "tauri info"
   },
   "dependencies": {
-    "@fontsource/lora": "^5.3.0",
-    "@fontsource/poppins": "^5.3.0",
     "@tauri-apps/api": "^2.11.1",
     "@tauri-apps/plugin-dialog": "^2.4.1",
     "@tauri-apps/plugin-fs": "^2.4.4",

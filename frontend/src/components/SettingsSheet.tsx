@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Cpu, Keyboard, MonitorPlay, Palette, SlidersHorizontal, Subtitles, Volume2, X } from "lucide-react";
 
 import type { AppConfig } from "../types";
@@ -31,6 +31,25 @@ const sectionCopy: Record<SettingsSection, { title: string; body: string }> = {
 
 export function SettingsSheet({ open, config, onClose, onChange }: SettingsSheetProps) {
   const [activeSection, setActiveSection] = useState<SettingsSection>("playback");
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) {
+      return;
+    }
+    if (open && !dialog.open) {
+      dialog.showModal();
+    }
+    if (!open && dialog.open) {
+      dialog.close();
+    }
+    return () => {
+      if (dialog.open) {
+        dialog.close();
+      }
+    };
+  }, [open]);
 
   if (!open) {
     return null;
@@ -41,8 +60,15 @@ export function SettingsSheet({ open, config, onClose, onChange }: SettingsSheet
   };
 
   return (
-    <div className="sheet-backdrop" role="presentation" onMouseDown={onClose}>
-      <section className="settings-sheet" role="dialog" aria-modal="true" aria-labelledby="settings-title" onMouseDown={(event) => event.stopPropagation()}>
+    <dialog
+      ref={dialogRef}
+      className="settings-sheet"
+      aria-labelledby="settings-title"
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+    >
         <header className="settings-sheet__header">
           <div>
             <span className="panel-eyebrow">PlayBack preferences</span>
@@ -99,12 +125,11 @@ export function SettingsSheet({ open, config, onClose, onChange }: SettingsSheet
             </label>
             <div className="shortcut-card">
               <div><Keyboard aria-hidden="true" size={17} /><strong>Keyboard first</strong></div>
-              <p>Space toggles playback, arrow keys seek and adjust volume, F toggles fullscreen, and ⌘K opens search.</p>
+              <p>Space toggles playback, arrow keys seek and adjust volume, F toggles fullscreen, and Ctrl/⌘K focuses search.</p>
             </div>
             <div className="settings-content__footer"><Volume2 aria-hidden="true" size={15} /> Changes save automatically.</div>
           </div>
         </div>
-      </section>
-    </div>
+    </dialog>
   );
 }

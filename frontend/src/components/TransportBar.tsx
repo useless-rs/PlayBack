@@ -1,12 +1,7 @@
 import {
-  Captions,
-  Gauge,
-  ListVideo,
   Maximize2,
   Pause,
   Play,
-  RotateCcw,
-  RotateCw,
   SkipBack,
   SkipForward,
   Volume2,
@@ -20,17 +15,12 @@ interface TransportBarProps {
   position: number;
   duration: number | null;
   volume: number;
-  speed: number;
-  subtitleVisible: boolean;
-  playlistVisible: boolean;
   onTogglePlayback: () => void;
   onSeekRelative: (seconds: number) => void;
   onSeekAbsolute: (seconds: number) => void;
   onPreviousTrack: () => void;
   onNextTrack: () => void;
   onSetVolume: (volume: number) => void;
-  onToggleSubtitles: () => void;
-  onTogglePlaylist: () => void;
   onToggleFullscreen: () => void;
 }
 
@@ -52,17 +42,12 @@ export function TransportBar({
   position,
   duration,
   volume,
-  speed,
-  subtitleVisible,
-  playlistVisible,
   onTogglePlayback,
   onSeekRelative,
   onSeekAbsolute,
   onPreviousTrack,
   onNextTrack,
   onSetVolume,
-  onToggleSubtitles,
-  onTogglePlaylist,
   onToggleFullscreen,
 }: TransportBarProps) {
   const progress = duration && duration > 0 ? Math.min(100, (position / duration) * 100) : 0;
@@ -105,20 +90,12 @@ export function TransportBar({
       <div className="transport__main-row">
         <div className="transport__left-actions">
           <IconButton label="Previous track" icon={SkipBack} size="sm" onClick={onPreviousTrack} />
-          <IconButton label="Seek backward 10 seconds" icon={RotateCcw} size="sm" onClick={() => onSeekRelative(-10)} />
           <button type="button" className="transport__play" onClick={onTogglePlayback} aria-label={paused ? "Play" : "Pause"}>
             {paused ? <Play aria-hidden="true" size={18} fill="currentColor" /> : <Pause aria-hidden="true" size={18} fill="currentColor" />}
           </button>
-          <IconButton label="Seek forward 10 seconds" icon={RotateCw} size="sm" onClick={() => onSeekRelative(10)} />
           <IconButton label="Next track" icon={SkipForward} size="sm" onClick={onNextTrack} />
         </div>
         <div className="transport__right-actions">
-          <button type="button" className="speed-control" aria-label={`Playback speed ${speed.toFixed(2)}x`} title="Playback speed">
-            <Gauge aria-hidden="true" size={15} />
-            <span>{speed.toFixed(2)}x</span>
-          </button>
-          <IconButton label={subtitleVisible ? "Hide subtitles" : "Show subtitles"} icon={Captions} active={subtitleVisible} size="sm" onClick={onToggleSubtitles} />
-          <IconButton label={playlistVisible ? "Hide playlist" : "Show playlist"} icon={ListVideo} active={playlistVisible} size="sm" onClick={onTogglePlaylist} />
           <div className="volume-control">
             <IconButton label={muted ? "Unmute" : "Mute"} icon={muted ? VolumeX : Volume2} size="sm" onClick={() => onSetVolume(muted ? 100 : 0)} />
             <input

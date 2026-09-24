@@ -1,11 +1,9 @@
 import {
   Film,
   FolderOpen,
-  HardDrive,
   ListVideo,
   PanelLeftClose,
   PanelLeftOpen,
-  Plus,
   Settings2,
 } from "lucide-react";
 
@@ -33,7 +31,9 @@ export function Sidebar({
     <aside className={`sidebar${collapsed ? " sidebar--collapsed" : ""}`} aria-label="Primary navigation">
       <div className="sidebar__topline">
         <div className="brand-mark" aria-label="PlayBack home">
-          <span className="brand-mark__glyph">P</span>
+          <span className="brand-mark__glyph">
+            <img src="/playback-mark.svg" alt="" />
+          </span>
           {!collapsed ? <span className="brand-mark__name">PlayBack</span> : null}
         </div>
         <IconButton
@@ -72,41 +72,7 @@ export function Sidebar({
         </button>
       </div>
 
-      {!collapsed ? (
-        <div className="sidebar__section">
-          <div className="sidebar__section-heading">
-            <span>Recent</span>
-            <IconButton label="Add recent item" icon={Plus} size="sm" />
-          </div>
-          <div className="sidebar__recent-list">
-            <div className="sidebar__recent-item">
-              <span className="sidebar__recent-icon"><Film aria-hidden="true" size={14} /></span>
-              <span className="sidebar__recent-copy">
-                <strong>The Long Way Home</strong>
-                <small>Yesterday, 01:42:18</small>
-              </span>
-            </div>
-            <div className="sidebar__recent-item">
-              <span className="sidebar__recent-icon"><Film aria-hidden="true" size={14} /></span>
-              <span className="sidebar__recent-copy">
-                <strong>Field Notes: 04</strong>
-                <small>Monday, 00:32:09</small>
-              </span>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
       <div className="sidebar__footer">
-        {!collapsed ? (
-          <div className="sidebar__storage">
-            <div className="sidebar__storage-row">
-              <span><HardDrive aria-hidden="true" size={14} /> Local library</span>
-              <span>24.8 GB</span>
-            </div>
-            <div className="storage-meter"><span style={{ width: "38%" }} /></div>
-          </div>
-        ) : null}
         <button type="button" className="sidebar__action" onClick={onOpenSettings} title="Settings">
           <Settings2 aria-hidden="true" size={18} strokeWidth={1.8} />
           {!collapsed ? <span>Settings</span> : null}

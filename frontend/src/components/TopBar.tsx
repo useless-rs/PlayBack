@@ -2,11 +2,14 @@ import { Command, MoreHorizontal, Moon, PanelRight, Search, Sun } from "lucide-r
 
 import type { ThemeMode } from "../types";
 import { IconButton } from "./IconButton";
+import { WindowControls } from "./WindowControls";
 
 interface TopBarProps {
   title: string;
   theme: ThemeMode;
   playlistVisible: boolean;
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
   onToggleTheme: () => void;
   onTogglePlaylist: () => void;
   onOpenSettings: () => void;
@@ -16,6 +19,8 @@ export function TopBar({
   title,
   theme,
   playlistVisible,
+  searchQuery,
+  onSearchChange,
   onToggleTheme,
   onTogglePlaylist,
   onOpenSettings,
@@ -30,7 +35,14 @@ export function TopBar({
       <div className="topbar__tools">
         <label className="search-field">
           <Search aria-hidden="true" size={15} strokeWidth={1.8} />
-          <input aria-label="Search library" placeholder="Search library" type="search" />
+          <input
+            id="library-search"
+            aria-label="Search library"
+            placeholder="Search library"
+            type="search"
+            value={searchQuery}
+            onChange={(event) => onSearchChange(event.target.value)}
+          />
           <kbd><Command aria-hidden="true" size={11} /> K</kbd>
         </label>
         <IconButton
@@ -45,6 +57,7 @@ export function TopBar({
           onClick={onTogglePlaylist}
         />
         <IconButton label="More actions" icon={MoreHorizontal} onClick={onOpenSettings} />
+        <WindowControls />
       </div>
     </header>
   );

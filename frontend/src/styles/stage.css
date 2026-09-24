@@ -6,8 +6,9 @@
   min-height: 0;
   overflow: hidden;
   color: var(--stage-text);
-  background: var(--surface-stage);
+  background: color-mix(in srgb, #1d1d1f 90%, transparent);
   box-shadow: inset 0 0 0 1px var(--stage-border);
+  backdrop-filter: blur(24px) saturate(85%);
 }
 
 .video-stage__topline,
@@ -87,7 +88,7 @@
   background: var(--stage-elevated);
   border: 1px solid var(--stage-border);
   border-radius: var(--radius-xl);
-  box-shadow: 0 0 0 1px var(--accent-ring), var(--shadow-overlay);
+  box-shadow: 0 0 0 1px var(--playback-soft), var(--shadow-overlay);
 }
 
 .video-stage__film-icon,
@@ -100,13 +101,13 @@
 
 .video-stage__film-icon {
   margin-bottom: var(--space-4);
-  color: var(--accent);
+  color: var(--playback);
 }
 
 .video-stage__kicker,
 .empty-state__eyebrow {
   margin: 0 0 var(--space-2);
-  color: var(--accent);
+  color: var(--playback);
   font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 0.08em;

@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import { Check, MoreHorizontal, Play, Plus, Search, Trash2 } from "lucide-react";
 
 import type { MediaItem } from "../types";
@@ -12,6 +13,15 @@ interface PlaylistPanelProps {
 }
 
 export function PlaylistPanel({ items, activeId, onSelect, onRemove, onOpenFiles }: PlaylistPanelProps) {
+  const [filter, setFilter] = useState("");
+  const visibleItems = useMemo(() => {
+    const query = filter.trim().toLocaleLowerCase();
+    if (!query) {
+      return items;
+    }
+    return items.filter((item) => `${item.title} ${item.subtitle}`.toLocaleLowerCase().includes(query));
+  }, [filter, items]);
+
   return (
     <aside className="playlist-panel" aria-label="Playlist">
       <div className="playlist-panel__header">
@@ -26,10 +36,16 @@ export function PlaylistPanel({ items, activeId, onSelect, onRemove, onOpenFiles
       </div>
       <label className="playlist-search">
         <Search aria-hidden="true" size={14} />
-        <input aria-label="Filter playlist" placeholder="Filter playlist" type="search" />
+        <input
+          aria-label="Filter playlist"
+          placeholder="Filter playlist"
+          type="search"
+          value={filter}
+          onChange={(event) => setFilter(event.target.value)}
+        />
       </label>
       <div className="playlist-panel__list">
-        {items.map((item, index) => {
+        {visibleItems.length > 0 ? visibleItems.map((item, index) => {
           const active = item.id === activeId;
           return (
             <div className={`playlist-row${active ? " is-active" : ""}`} key={item.id}>
@@ -48,7 +64,13 @@ export function PlaylistPanel({ items, activeId, onSelect, onRemove, onOpenFiles
               </div>
             </div>
           );
-        })}
+        }) : (
+          <div className="playlist-panel__empty">
+            <Search aria-hidden="true" size={18} />
+            <strong>No matches</strong>
+            <span>Try a different title or clear the filter.</span>
+          </div>
+        )}
       </div>
       <button type="button" className="playlist-panel__add" onClick={onOpenFiles}>
         <Plus aria-hidden="true" size={15} />

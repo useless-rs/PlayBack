@@ -25,7 +25,7 @@ export function IconButton({
       type="button"
       className={`icon-button icon-button--${size}${active ? " is-active" : ""}`}
       aria-label={label}
-      aria-pressed={active}
+      aria-pressed={active ? true : undefined}
       disabled={disabled}
       onClick={onClick}
       title={label}

@@ -3,7 +3,7 @@ import { listen } from "@tauri-apps/api/event";
 
 import type { AppConfig, PlaybackSnapshot, PlaybackStateEvent } from "../types";
 
-const isTauriRuntime = (): boolean => "__TAURI_INTERNALS__" in window;
+export const isTauriRuntime = (): boolean => "__TAURI_INTERNALS__" in window;
 
 async function safeInvoke<T>(command: string, args?: Record<string, unknown>): Promise<T | null> {
   if (!isTauriRuntime()) {

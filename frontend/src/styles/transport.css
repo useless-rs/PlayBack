@@ -1,13 +1,16 @@
 .transport {
   flex: 0 0 var(--transport-height);
-  padding: var(--space-3) var(--space-6) var(--space-4);
-  background: var(--surface-base);
+  padding: 10px var(--space-6) 12px;
+  background: var(--surface-glass, #1b1b1e);
+  background-image: var(--glass-sheen);
   border-top: 1px solid var(--border-default);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-primary) 5%, transparent);
+  backdrop-filter: blur(var(--blur-glass)) saturate(var(--saturation-glass));
 }
 
 .transport__timeline {
   display: grid;
-  gap: 7px;
+  gap: 6px;
 }
 
 .timeline {
@@ -15,14 +18,14 @@
   height: 4px;
   overflow: visible;
   cursor: pointer;
-  background: var(--border-default);
-  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-primary) 16%, transparent);
+  border-radius: var(--radius-pill);
 }
 
 .timeline__fill {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: var(--playback);
   border-radius: inherit;
 }
 
@@ -32,9 +35,9 @@
   width: 12px;
   height: 12px;
   background: var(--surface-raised);
-  border: 2px solid var(--accent);
+  border: 2px solid var(--playback);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  box-shadow: 0 0 0 4px var(--playback-soft);
   transform: translate(-50%, -50%);
 }
 
@@ -48,7 +51,7 @@
 
 .transport__main-row {
   justify-content: space-between;
-  margin-top: var(--space-3);
+  margin-top: 6px;
 }
 
 .transport__left-actions,
@@ -58,21 +61,21 @@
 
 .transport__play {
   display: grid;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   margin-inline: 5px;
   place-items: center;
-  color: var(--accent-on);
+  color: var(--playback-on);
   cursor: pointer;
-  background: var(--accent);
-  border: 1px solid var(--accent);
+  background: var(--playback);
+  border: 1px solid color-mix(in srgb, var(--playback) 76%, transparent);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px var(--accent-soft);
-  transition: transform 140ms ease, background-color 140ms ease;
+  box-shadow: 0 0 0 4px var(--playback-soft), 0 8px 20px color-mix(in srgb, #000000 18%, transparent);
+  transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out);
 }
 
 .transport__play:hover {
-  background: var(--accent-strong);
+  background: color-mix(in srgb, var(--playback) 88%, #ffffff);
   transform: scale(1.04);
 }
 
@@ -86,9 +89,10 @@
   color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: var(--text-caption);
-  background: var(--surface-sunken);
+  background: var(--surface-glass-strong);
   border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-primary) 7%, transparent);
 }
 
 .speed-control {

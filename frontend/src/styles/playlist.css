@@ -4,8 +4,11 @@
   flex-direction: column;
   min-width: 0;
   padding: 23px 14px var(--space-4);
-  background: var(--surface-base);
+  background: var(--surface-glass, #1b1b1e);
+  background-image: var(--glass-sheen);
   border-left: 1px solid var(--border-default);
+  box-shadow: inset 1px 0 0 color-mix(in srgb, var(--text-primary) 4%, transparent);
+  backdrop-filter: blur(var(--blur-glass)) saturate(var(--saturation-glass));
 }
 
 .playlist-panel__header {
@@ -175,6 +178,33 @@
 
 .app--animated .playing-bars i:nth-child(3) {
   animation-delay: -180ms;
+}
+
+.playlist-panel__empty {
+  display: grid;
+  min-height: 140px;
+  align-content: center;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+.playlist-panel__empty svg {
+  color: var(--accent);
+}
+
+.playlist-panel__empty strong {
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--text-ui);
+}
+
+.playlist-panel__empty span {
+  max-width: 24ch;
+  font-size: var(--text-caption);
+  line-height: 1.5;
 }
 
 .playlist-panel__add {

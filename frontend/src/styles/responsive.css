@@ -9,7 +9,6 @@
 }
 
 @media (max-width: 900px) {
-  .transport__right-actions .speed-control,
   .volume-control input {
     display: none;
   }
@@ -17,7 +16,7 @@
 
 @media (max-width: 860px) {
   :root {
-    --sidebar-width: 72px;
+    --sidebar-width: 68px;
   }
 
   .sidebar {
@@ -97,10 +96,7 @@
     padding-inline: var(--space-3);
   }
 
-  .transport__right-actions .speed-control,
-  .volume-control,
-  .transport__right-actions .icon-button[aria-label="Hide playlist"],
-  .transport__right-actions .icon-button[aria-label="Show playlist"] {
+  .volume-control input {
     display: none;
   }
 
@@ -154,6 +150,30 @@
 
   .settings-content {
     padding: var(--space-4);
+  }
+}
+
+.app--reduced-transparency .sidebar,
+.app--reduced-transparency .topbar,
+.app--reduced-transparency .playlist-panel,
+.app--reduced-transparency .transport,
+.app--reduced-transparency .settings-sheet,
+.app--reduced-transparency .search-field,
+.app--reduced-transparency .playlist-search {
+  background-image: none;
+  backdrop-filter: none;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .sidebar,
+  .topbar,
+  .playlist-panel,
+  .transport,
+  .settings-sheet,
+  .search-field,
+  .playlist-search {
+    background-image: none;
+    backdrop-filter: none;
   }
 }
 
